@@ -97,11 +97,9 @@ object Assignment1 {
 
   def square_root_bisection(x: Double, eps: Double, max_iterations: Int, low_guess: Double, high_guess: Double): Double = {
     def find_root(x: Double, eps: Double, max_iterations: Int, low_guess: Double, high_guess: Double, num_iterations: Int): Double = {
-      //println(s"low $low_guess, high $high_guess, iteration $num_iterations")
       val mid_point = (high_guess + low_guess) / 2
       if (num_iterations >= max_iterations) mid_point
       else {
-        //println(s"guess $mid_point, squared ${mid_point * mid_point}, error ${mid_point * mid_point - x}")
         val error = Math.abs(mid_point * mid_point - x)
         if (error < eps) 
           mid_point 
@@ -118,11 +116,9 @@ object Assignment1 {
 
   def square_root_regula_falsi(x: Double, eps: Double, max_iterations: Int, low_guess: Double, high_guess: Double): Double = {
     def find_root(x: Double, eps: Double, max_iterations: Int, low_guess: Double, high_guess: Double, num_iterations: Int): Double = {
-      //println(s"low $low_guess, high $high_guess, iteration $num_iterations")
       val new_guess = ((low_guess * (high_guess * high_guess - 2)) - (high_guess * (low_guess * low_guess - 2))) / ((high_guess * high_guess - 2) - (low_guess * low_guess - 2))
       if (num_iterations >= max_iterations) new_guess
       else {
-        //println(s"guess $new_guess, squared ${new_guess * new_guess}, error ${new_guess * new_guess - x}")
         val error = Math.abs(new_guess * new_guess - x)
         if (error < eps)
           new_guess
@@ -143,7 +139,6 @@ object Assignment1 {
       if (num_iterations >= max_iterations) c
       else {
         val error = Math.abs(r._2 - r._1)
-        //println(s"guess ${c}, error ${error}")
         if (error < eps) c
         else {
           if (f(r._1) * f(c) < 0) iterate(num_iterations+1, (r._1, c))
@@ -160,7 +155,6 @@ object Assignment1 {
       if (num_iterations >= max_iterations) c
       else {
         val error = Math.abs(r._2 - r._1)
-        //println(s"guess ${c}, error ${error}")
         if (error < eps) c
         else {
           if (f(r._1) * f(c) < 0) iterate(num_iterations+1, (r._1, c))
@@ -177,7 +171,6 @@ object Assignment1 {
       if (num_iterations >= max_iterations) c
       else {
         val error = Math.abs(r._2 - r._1)
-        //println(s"guess ${c}, error ${error}")
         if (error < eps) c
         else {
           if (f(r._1) * f(c) < 0) iterate(num_iterations+1, (r._1, c))
@@ -187,27 +180,5 @@ object Assignment1 {
     }
     iterate(1, r)
   }
-
-
-
-  //  println(s"Using Newton's method, square root of ${x} is ${square_root_newton(x, eps, max_iterations, low_guess)}")
-   
-  def square_root_newton(x: Double, eps: Double, max_iterations: Int, guess: Double): Double = {
-    def find_root(x: Double, eps: Double, max_iterations: Int, prev_guess: Double, num_iterations: Int): Double = {
-      //println(s"previous guess $prev_guess, iteration $num_iterations")
-      val new_guess = prev_guess - ((prev_guess * prev_guess) - x) / (2 * prev_guess)
-      if (num_iterations >= max_iterations) new_guess
-      else {
-        //println(s"guess $new_guess, squared ${new_guess * new_guess}, error ${new_guess * new_guess - x}")
-        val error = Math.abs(new_guess * new_guess - x)
-        if (error < eps)
-          new_guess
-        else
-          find_root(x, eps, max_iterations, new_guess, num_iterations+1)
-      }
-    }
-    find_root(x, eps, max_iterations, guess, 1)
-  }
-
 
 }

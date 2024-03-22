@@ -137,7 +137,7 @@ object Exam1 {
     val first_list: List[Any] = List(3.14, "foo")
     val second_list: List[Any] = List(true, pentagon)
 
-    // 5o. 
+    // 5o. these two lists have the same type, therefore they are subtypes and supertypes of each other
     val firstWrappedList: List[MyWrapper[PitBull]] = List(new MyWrapper(rocco))
     val secondWrappedList: List[MyWrapper[PitBull]] = List(new MyWrapper(brutus))
 
@@ -156,32 +156,32 @@ object Exam1 {
   //              what the program does, then the function is a pure function
   val myVal = 10
   var myVar = 20
-  def f(x: Int) = {  // pure
-    var y = 9
+  def f(x: Int) = {  // pure: f returns the value () which is of type Unit. The creation of a local variable
+    var y = 9        //       inside of f has no effect on its purity
   }
-  def g(x: Int) = {  // pure
+  def g(x: Int) = {  // pure: g(x) = r(x) and r is pure, therefore g is pure
     def r(y: Int) = {
       y + 7
     }
     r(x)
   }
-  def h(x: Int) = {
-    x + myVal
+  def h(x: Int) = {  // impure: h depends on state that is maintained outside of its lexical scope but not passed 
+    x + myVal        //         in as a parameter
   }
-  def j(x: Int) = {
+  def j(x: Int) = {  // impure: same reason as for function h
     x + myVar
   }
-  def k(x: Int) = {
-    myVar = x + 3
+  def k(x: Int) = {  // impure: k creates a side effect by updating a value outside of its lexical scope
+    myVar = x + 3    //         but the update is not done via its return value
     myVar
   }
-  def m(x: Int) = {
+  def m(x: Int) = {  // pure: for any given value of x, m(x) will always return the same value
     3
   }
-  def n(x: Int, y: Int) = {
-    x + 3
+  def n(x: Int, y: Int) = { // pure: same reason as for function m. A function need incorporate all of its
+    x + 3                   //       parameters in order to be pure
   }
-  def p(x: Int) = {
+  def p(x: Int) = {  // impure: p creates a side effect by printing a 
     println(s"x = ${x}")
     x + 3
   }
