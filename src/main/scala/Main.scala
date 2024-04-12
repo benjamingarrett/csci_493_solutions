@@ -6,4 +6,5 @@ object Main extends App {
   SieveEratosthenes.go
   ClassLecture.go
   Exam1.go
+  Exam2.go
 }
