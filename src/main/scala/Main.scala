@@ -7,4 +7,5 @@ object Main extends App {
   ClassLecture.go
   Exam1.go
   Exam2.go
+  Assignment4.go
 }
